@@ -20,8 +20,8 @@ export default class LoginUserService {
     }
     // await this.userModel.create(user);
     const newUser = await this.userModel.findOne({ where: { email: user.email } });
-    if (!newUser) {
-      throw new Error('Esse email não existe');
+    if (!newUser?.email || !newUser.password) {
+      throw new Error('Incorrect email or password');
     }
     const token = generateToken(newUser);
     return token;

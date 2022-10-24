@@ -19,8 +19,13 @@ export default class LoginUserService {
       throw new Error('All fields must be filled');
     }
     // await this.userModel.create(user);
-    const newUser = await this.userModel.findOne({ where: { email: user.email } });
-    if (!newUser?.email || !newUser.password) {
+    const newUser = await this.userModel.findOne({
+      where: {
+        email: user.email,
+        password: user.password,
+      },
+    });
+    if (!newUser) {
       throw new Error('Incorrect email or password');
     }
     const token = generateToken(newUser);

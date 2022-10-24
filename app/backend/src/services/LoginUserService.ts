@@ -11,15 +11,18 @@ const generateToken = (user: User): string => {
 export default class LoginUserService {
   constructor(private userModel: typeof User) { }
 
-  async create(user: IUser): Promise<string> {
+  async findUser(user: IUser): Promise<string> {
     if (!user.email) {
       throw new Error('All fields must be filled');
     }
     if (!user.password) {
       throw new Error('All fields must be filled');
     }
-    const newUser = await this.userModel.create(user);
-    await this.userModel.findOne({ where: { email: user.email } });
+    // await this.userModel.create(user);
+    const newUser = await this.userModel.findOne({ where: { email: user.email } });
+    if (!newUser) {
+      throw new Error('Esse email não existe');
+    }
     const token = generateToken(newUser);
     return token;
   }

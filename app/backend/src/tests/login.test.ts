@@ -1,45 +1,57 @@
-// import * as sinon from 'sinon';
-// import * as chai from 'chai';
-// // @ts-ignore
-// import chaiHttp = require('chai-http');
+import * as sinon from 'sinon';
+import * as chai from 'chai';
+// @ts-ignore
+import chaiHttp = require('chai-http');
 
-// import { app } from '../app';
-// import Example from '../database/models/User';
+import { app } from '../app';
+import Example from '../database/models/User';
 
-// import { Response } from 'superagent';
+import { Response } from 'superagent';
+import { Model } from 'sequelize/types';
+import User from '../database/models/User';
 
-// chai.use(chaiHttp);
+chai.use(chaiHttp);
 
-// const { expect } = chai;
+const { expect } = chai;
 
-// describe('Seu teste', () => {
-//   /**
-//    * Exemplo do uso de stubs com tipos
-//    */
+const userPerfect = { username: 'any_user', password: '123456', email: 'lucas@email.com', role: 'admin'};
+const userOutMail = { username: 'any_user', password: '123456', role: 'admin'};
+const userOutPass = { username: 'any_user', email: 'lucas@email.com', role: 'admin'};
+// const token = '123xablau';
 
-//   // let chaiHttpResponse: Response;
+describe('POST para /login', () => {
+  describe('quando o campo "email" não é colocado', () => {
+    it('deve retornar um status 400', async () => {
+      const hhtpResponse = await chai
+      .request(app)
+      .post('/login')
+      .send(userOutMail);
+      expect(hhtpResponse.status).to.equal(400);
+      expect(hhtpResponse.body).to.deep.equal({ message: 'All fields must be filled' })
+    })
+  })
 
-//   // before(async () => {
-//   //   sinon
-//   //     .stub(Example, "findOne")
-//   //     .resolves({
-//   //       ...<Seu mock>
-//   //     } as Example);
-//   // });
+  describe('quando o campo "password" não é colocado', () => {
+    it('deve retornar um status 400', async () => {
+      const hhtpResponse = await chai
+      .request(app)
+      .post('/login')
+      .send(userOutPass);
+      expect(hhtpResponse.status).to.equal(400);
+      expect(hhtpResponse.body).to.deep.equal({ message: 'All fields must be filled' })
+    })
+  })
 
-//   // after(()=>{
-//   //   (Example.findOne as sinon.SinonStub).restore();
-//   // })
+  // describe('quando a requisição é feita com sucesso', () => {
+  //   beforeEach(() => sinon.stub(Model, 'findOne').resolves(userPerfect as User))
+  //   afterEach(() => sinon.restore());
+  //   it('deve retornar um token', async () => {
+  //     const httpResponse = await chai
+  //     .request(app)
+  //     .post('/login')
+  //     .send(userPerfect);
+  //     expect(httpResponse.status).to.equal(200);
+  //   })
+  // })
 
-//   // it('...', async () => {
-//   //   chaiHttpResponse = await chai
-//   //      .request(app)
-//   //      ...
-
-//   //   expect(...)
-//   // });
-
-//   it('Seu sub-teste', () => {
-//     expect(false).to.be.eq(true);
-//   });
-// });
+})

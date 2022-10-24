@@ -7,6 +7,6 @@ const loginService = new LoginUserService(User);
 const loginController = new LoginController(loginService);
 const router = Router();
 
-router.post('/login', (req, res) => loginController.create(req, res));
+router.post('/login', (req, res) => loginController.findUser(req, res));
 
 export default router;

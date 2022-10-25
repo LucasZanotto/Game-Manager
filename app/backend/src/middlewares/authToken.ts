@@ -11,7 +11,7 @@ export default function authToken(req: Request, res: Response, next: NextFunctio
   }
   try {
     const payload = verify(token, 'jwt_secret');
-    req.body.user = payload;
+    res.locals.user = payload;
   } catch (err) {
     return res.status(401).json({ message: 'Expired or invalid token' });
   }

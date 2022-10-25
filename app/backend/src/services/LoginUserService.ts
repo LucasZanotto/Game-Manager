@@ -3,6 +3,17 @@ import bcrypt = require('bcryptjs');
 import IUser from '../entities/IUser';
 import User from '../database/models/User';
 
+// interface infoToken {
+//   role: string,
+// }
+
+interface userLocal {
+  id: number;
+  name: string;
+  iat: number;
+  exp: number;
+}
+
 const generateToken = (user: User): string => {
   const payload = { id: user.id, name: user.username };
   const jwtCOnfig: SignOptions = {
@@ -27,5 +38,14 @@ export default class LoginUserService {
     // console.log(bcrypt.compareSync(user.password, hash));
     const token = generateToken(newUser);
     return token;
+  }
+
+  static infoToken(token: userLocal) {
+    if (token.name === 'Admin') {
+      return 'admin';
+    }
+    if (token.name === 'User') {
+      return 'user';
+    }
   }
 }

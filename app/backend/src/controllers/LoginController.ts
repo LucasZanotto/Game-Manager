@@ -11,4 +11,11 @@ export default class LoginController {
       return res.status(401).json({ message: error.message });
     }
   }
+
+  static infoToken(req: Request, res: Response) {
+    console.log(res.locals.user);
+
+    const role = LoginUserService.infoToken(res.locals.user);
+    return res.status(200).json({ role });
+  }
 }

@@ -21,9 +21,9 @@ export default class LoginUserService {
       where: { email: user.email } });
     if (!newUser) throw new Error('Incorrect email or password');
     const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(user.password, salt);
-    if (!bcrypt.compareSync(newUser.password, hash)) throw new Error('Incorrect email or password');
-    console.log(bcrypt.compareSync(user.password, hash));
+    const hash = bcrypt.hashSync(newUser.password, salt);
+    if (!bcrypt.compareSync(user.password, hash)) throw new Error('Incorrect email or password');
+    // console.log(bcrypt.compareSync(user.password, hash));
     const token = generateToken(newUser);
     return token;
   }

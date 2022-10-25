@@ -8,5 +8,6 @@ export default function userMiddle(req: Request, res: Response, next: NextFuncti
   if (!password) {
     res.status(400).json({ message: 'All fields must be filled' });
   }
+  if (password.length < 6) throw new Error('Incorrect email or password');
   next();
 }

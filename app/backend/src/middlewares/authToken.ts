@@ -7,7 +7,7 @@ export default function authToken(req: Request, res: Response, next: NextFunctio
   const token = req.headers.authorization;
 
   if (!token) {
-    return res.status(401).json({ message: 'Token not found' });
+    return res.status(401).json({ message: 'Incorrect email or password' });
   }
   try {
     const payload = verify(token, 'senhaSecreta');

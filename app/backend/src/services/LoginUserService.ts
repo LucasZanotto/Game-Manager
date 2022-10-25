@@ -1,35 +1,29 @@
-import { sign } from 'jsonwebtoken';
+import { sign, SignOptions } from 'jsonwebtoken';
 import bcrypt = require('bcryptjs');
 import IUser from '../entities/IUser';
 import User from '../database/models/User';
 
 const generateToken = (user: User): string => {
   const payload = { id: user.id, name: user.username };
-  const token = sign(payload, 'SENHASUPERSECRETA');
+  const jwtCOnfig: SignOptions = {
+    expiresIn: '20d',
+  };
+  const token = sign(payload, 'senhaSecreta', jwtCOnfig);
   return token;
-};
-
-const verifyHashPass = (password: string) => {
-  const salt = bcrypt.genSaltSync(10);
-  const hash = bcrypt.hashSync(password, salt);
-  return bcrypt.compareSync(password, hash);
 };
 
 export default class LoginUserService {
   constructor(private userModel: typeof User) { }
 
   async findUser(user: IUser): Promise<string> {
-    if (!user.email) {
-      throw new Error('All fields must be filled');
-    }
-    if (!user.password) {
-      throw new Error('All fields must be filled');
-    }
     // await this.userModel.create(user);
     const newUser = await this.userModel.findOne({
-      where: { email: user.email, password: user.password } });
+      where: { email: user.email } });
     if (!newUser) throw new Error('Incorrect email or password');
-    if (!verifyHashPass(newUser.password)) throw new Error('Incorrect email or password');
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(user.password, salt);
+    if (!bcrypt.compareSync(newUser.password, hash)) throw new Error('Incorrect email or password');
+    console.log(bcrypt.compareSync(user.password, hash));
     const token = generateToken(newUser);
     return token;
   }

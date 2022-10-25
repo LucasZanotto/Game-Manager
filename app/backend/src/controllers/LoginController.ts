@@ -8,7 +8,7 @@ export default class LoginController {
       const token = await this.loginService.findUser(req.body);
       return res.status(200).json({ token });
     } catch (error: any) {
-      return res.status(400).json({ message: error.message });
+      return res.status(401).json({ message: error.message });
     }
   }
 }

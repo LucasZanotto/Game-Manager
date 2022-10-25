@@ -41,11 +41,7 @@ export default class LoginUserService {
   }
 
   static infoToken(token: userLocal) {
-    if (token.name === 'Admin') {
-      return 'admin';
-    }
-    if (token.name === 'User') {
-      return 'user';
-    }
+    if (token.name === 'Admin') return 'admin';
+    return 'user';
   }
 }

@@ -5,7 +5,7 @@ import authPass from '../middlewares/authPass';
 import User from '../database/models/User';
 import LoginUserService from '../services/LoginUserService';
 import LoginController from '../controllers/LoginController';
-import authToken from '../middlewares/authToken';
+// import authToken from '../middlewares/authToken';
 
 const loginService = new LoginUserService(User);
 const loginController = new LoginController(loginService);

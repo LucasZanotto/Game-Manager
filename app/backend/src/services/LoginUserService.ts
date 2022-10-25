@@ -20,9 +20,10 @@ export default class LoginUserService {
     const newUser = await this.userModel.findOne({
       where: { email: user.email } });
     if (!newUser) throw new Error('Incorrect email or password');
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(newUser.password, salt);
-    if (!bcrypt.compareSync(user.password, hash)) throw new Error('Incorrect email or password');
+    if (!bcrypt.compareSync(
+      user.password,
+      newUser.password,
+    )) throw new Error('Incorrect email or password');
     // console.log(bcrypt.compareSync(user.password, hash));
     const token = generateToken(newUser);
     return token;

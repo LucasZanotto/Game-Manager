@@ -13,7 +13,7 @@ const router = Router();
 
 router.post(
   '/login',
-  authToken,
+  // authToken,
   userMiddle,
   authPass,
   loginMiddle,

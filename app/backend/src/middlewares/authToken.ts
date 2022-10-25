@@ -10,7 +10,7 @@ export default function authToken(req: Request, res: Response, next: NextFunctio
     return res.status(401).json({ message: 'Incorrect email or password' });
   }
   try {
-    const payload = verify(token, 'senhaSecreta');
+    const payload = verify(token, 'jwt_secret');
     req.body.user = payload;
   } catch (err) {
     return res.status(401).json({ message: 'Expired or invalid token' });

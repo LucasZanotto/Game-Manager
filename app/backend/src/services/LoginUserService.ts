@@ -8,7 +8,7 @@ const generateToken = (user: User): string => {
   const jwtCOnfig: SignOptions = {
     expiresIn: '20d',
   };
-  const token = sign(payload, 'senhaSecreta', jwtCOnfig);
+  const token = sign(payload, 'jwt_secret', jwtCOnfig);
   return token;
 };
 

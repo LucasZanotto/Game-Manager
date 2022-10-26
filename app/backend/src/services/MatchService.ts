@@ -52,4 +52,9 @@ export default class MatchService {
       homeTeam, homeTeamGoals, awayTeam, awayTeamGoals, inProgress: true });
     return newMatch;
   }
+
+  async updateMatchProgress(id: string) {
+    const updateMatch = await this.matchModel.update({ inProgress: false }, { where: { id } });
+    return updateMatch;
+  }
 }

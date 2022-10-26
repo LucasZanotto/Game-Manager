@@ -15,6 +15,11 @@ export default class MatchController {
 
   async createMatches(req: Request, res: Response) {
     const newMatches = await this.matchService.createMatch(req.body);
-    return res.status(200).json(newMatches);
+    return res.status(201).json(newMatches);
+  }
+
+  async updateMatches(req: Request, res: Response) {
+    await this.matchService.updateMatchProgress(req.params.id);
+    return res.status(200).json({ message: 'Finished' });
   }
 }

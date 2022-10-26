@@ -26,4 +26,9 @@ router.patch(
   (req, res) => matchController.updateMatches(req, res),
 );
 
+router.patch(
+  '/matches/:id',
+  (req, res) => matchController.updateMatchesGoals(req, res),
+);
+
 export default router;

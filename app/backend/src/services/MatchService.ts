@@ -24,6 +24,7 @@ export default class MatchService {
 
   async findProgressMatches(progress: string) {
     const boleano = progress === 'true';
+    console.log(boleano);
     const matches = await this.matchModel.findAll({
       where: { inProgress: boleano },
       include: [{ model: Team, as: 'teamHome', attributes: { exclude: ['id'] },

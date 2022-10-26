@@ -9,12 +9,7 @@ const router = Router();
 
 router.get(
   '/matches',
-  (req, res) => matchController.findAllMatches(req, res),
-);
-
-router.get(
-  '/matches',
-  (req, res) => matchController.findProgressMatches(req, res),
+  (req, res) => matchController.findMatches(req, res),
 );
 
 export default router;

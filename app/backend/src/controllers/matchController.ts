@@ -14,8 +14,12 @@ export default class MatchController {
   }
 
   async createMatches(req: Request, res: Response) {
-    const newMatches = await this.matchService.createMatch(req.body);
-    return res.status(201).json(newMatches);
+    try {
+      const newMatches = await this.matchService.createMatch(req.body);
+      return res.status(201).json(newMatches);
+    } catch (error: any) {
+      return res.status(422).json({ message: error.message });
+    }
   }
 
   async updateMatches(req: Request, res: Response) {

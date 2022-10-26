@@ -6,10 +6,27 @@ export default class MatchService {
 
   async findAllMatches() {
     const matches = await this.matchModel.findAll({
+      // where: { inProgress: true },
       include: [{
         model: Team,
         as: 'teamHome',
         attributes: { exclude: ['id'] },
+      },
+      {
+        model: Team,
+        as: 'teamAway',
+        attributes: { exclude: ['id'] },
+      },
+      ],
+    });
+    return matches;
+  }
+
+  async findProgressMatches(progress: string) {
+    const boleano = progress === 'true';
+    const matches = await this.matchModel.findAll({
+      where: { inProgress: boleano },
+      include: [{ model: Team, as: 'teamHome', attributes: { exclude: ['id'] },
       },
       {
         model: Team,

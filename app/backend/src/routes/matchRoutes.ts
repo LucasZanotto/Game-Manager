@@ -3,6 +3,7 @@ import authToken from '../middlewares/authToken';
 import MatchController from '../controllers/matchController';
 import Match from '../database/models/Match';
 import MatchService from '../services/MatchService';
+import MatchMiddle from '../middlewares/matchMiddle';
 
 const matchService = new MatchService(Match);
 const matchController = new MatchController(matchService);
@@ -16,6 +17,7 @@ router.get(
 router.post(
   '/matches',
   authToken,
+  MatchMiddle,
   (req, res) => matchController.createMatches(req, res),
 );
 

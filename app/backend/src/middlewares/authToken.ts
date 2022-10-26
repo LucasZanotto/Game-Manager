@@ -7,13 +7,13 @@ export default function authToken(req: Request, res: Response, next: NextFunctio
   const token = req.headers.authorization;
 
   if (!token) {
-    return res.status(401).json({ message: 'Incorrect email or password' });
+    return res.status(401).json({ message: 'Token must be a valid token' });
   }
   try {
     const payload = verify(token, 'jwt_secret');
     res.locals.user = payload;
   } catch (err) {
-    return res.status(401).json({ message: 'Expired or invalid token' });
+    return res.status(401).json({ message: 'Token must be a valid token' });
   }
   next();
 }

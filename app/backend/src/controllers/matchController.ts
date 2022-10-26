@@ -12,4 +12,9 @@ export default class MatchController {
     const matches = await this.matchService.findAllMatches();
     return res.status(200).json(matches);
   }
+
+  async createMatches(req: Request, res: Response) {
+    const newMatches = await this.matchService.createMatch(req.body);
+    return res.status(200).json(newMatches);
+  }
 }

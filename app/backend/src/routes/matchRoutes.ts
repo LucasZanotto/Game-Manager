@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import authToken from '../middlewares/authToken';
 import MatchController from '../controllers/matchController';
 import Match from '../database/models/Match';
 import MatchService from '../services/MatchService';
@@ -10,6 +11,12 @@ const router = Router();
 router.get(
   '/matches',
   (req, res) => matchController.findMatches(req, res),
+);
+
+router.post(
+  '/matches',
+  authToken,
+  (req, res) => matchController.createMatches(req, res),
 );
 
 export default router;

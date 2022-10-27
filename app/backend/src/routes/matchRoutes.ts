@@ -33,7 +33,12 @@ router.patch(
 
 router.get(
   '/leaderboard/home',
-  (req, res) => matchController.createLeaderBoard(req, res),
+  (req, res) => matchController.createLeaderBoardHome(req, res),
+);
+
+router.get(
+  '/leaderboard/away',
+  (req, res) => matchController.createLeaderBoardAway(req, res),
 );
 
 export default router;

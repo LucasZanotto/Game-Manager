@@ -34,8 +34,14 @@ export default class MatchController {
     return res.status(200).json(goals);
   }
 
-  async createLeaderBoard(req: Request, res: Response) {
-    const matches = await this.matchService.leaderBoard();
+  async createLeaderBoardHome(req: Request, res: Response) {
+    const matches = await this.matchService.leaderBoardHome();
+
+    return res.status(200).json(matches);
+  }
+
+  async createLeaderBoardAway(req: Request, res: Response) {
+    const matches = await this.matchService.leaderBoardAway();
 
     return res.status(200).json(matches);
   }

@@ -32,7 +32,7 @@ from (select te.team_name name,
 from matches ma inner join
  teams te on ma.home_team = te.id where ma.in_progress = false group by name) as ba
 group by ba.name
-order by totalPoints DESC, goalsBalance DESC, totalVictories DESC, goalsFavor DESC;
+order by totalPoints DESC, goalsBalance DESC, totalVictories DESC, goalsFavor DESC, goalsOwn ASC;
 
 
 

@@ -18,8 +18,9 @@ totalLosses,
 goalsFavor,
 goalsOwn,
 goalsFavor - goalsOwn goalsBalance,
-ROUND(((totalVictories * 3 + totalDraws)/((totalVictories + totalDraws + totalLosses) * 3)
-) * 100, 2) efficiency
+ROUND(
+  ((totalVictories * 3 + totalDraws)/((totalVictories + totalDraws + totalLosses) * 3)) * 100,
+   2) efficiency
 
 from (select te.team_name name,
  sum(case when ma.home_team_goals > ma.away_team_goals then 1 else  0 end) totalVictories,
@@ -28,10 +29,13 @@ from (select te.team_name name,
  sum(ma.home_team_goals) goalsFavor,
  sum(ma.away_team_goals) goalsOwn
  
-from matches ma inner join teams te
- on ma.home_team = te.id where ma.in_progress = false group by name) as ba
+from matches ma inner join
+ teams te on ma.home_team = te.id where ma.in_progress = false group by name) as ba
 group by ba.name
-order by totalPoints DESC, totalVictories DESC, goalsBalance DESC;
+order by totalPoints DESC, goalsBalance DESC, totalVictories DESC, goalsFavor DESC;
+
+
+
 
 
 `;

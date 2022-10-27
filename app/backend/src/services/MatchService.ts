@@ -68,4 +68,10 @@ export default class MatchService {
       .update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
     return updateMatch;
   }
+
+  // async leaderBoard(id: string, homeTeamGoals: number, awayTeamGoals: number) {
+  //   const updateMatch = await this.matchModel
+  //     .create({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+  //   return updateMatch;
+  // }
 }

@@ -7,6 +7,7 @@ export default class MatchController {
   async findMatches(req: Request, res: Response) {
     if (req.query.inProgress) {
       const matches = await this.matchService.findProgressMatches(req.query.inProgress as string);
+
       return res.status(200).json(matches);
     }
     const matches = await this.matchService.findAllMatches();
@@ -28,7 +29,7 @@ export default class MatchController {
   }
 
   async updateMatchesGoals(req: Request, res: Response) {
-    const goals = await this
+    await this
       .matchService.updateMatchGoals(req.params.id, req.body.homeTeamGoals, req.body.awayTeamGoals);
     return res.status(200).json({ message: 'Placar alterado' });
   }

@@ -10,12 +10,13 @@ import User from '../database/models/User';
 interface userLocal {
   id: number;
   name: string;
+  role: string;
   iat: number;
   exp: number;
 }
 
 const generateToken = (user: User): string => {
-  const payload = { id: user.id, name: user.username };
+  const payload = { id: user.id, name: user.username, role: user.role };
   const jwtCOnfig: SignOptions = {
     expiresIn: '20d',
   };
@@ -41,7 +42,8 @@ export default class LoginUserService {
   }
 
   static infoToken(token: userLocal) {
-    if (token.name === 'Admin') return 'admin';
+    const { role } = token;
+    if (role === 'admin') return 'admin';
     return 'user';
   }
 }

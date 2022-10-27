@@ -29,8 +29,8 @@ export default class MatchController {
   }
 
   async updateMatchesGoals(req: Request, res: Response) {
-    await this
+    const goals = await this
       .matchService.updateMatchGoals(req.params.id, req.body.homeTeamGoals, req.body.awayTeamGoals);
-    return res.status(200).json({ message: 'Placar alterado' });
+    return res.status(200).json(goals);
   }
 }

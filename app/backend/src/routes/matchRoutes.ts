@@ -31,4 +31,9 @@ router.patch(
   (req, res) => matchController.updateMatchesGoals(req, res),
 );
 
+router.get(
+  '/leaderboard/home',
+  (req, res) => matchController.createLeaderBoard(req, res),
+);
+
 export default router;

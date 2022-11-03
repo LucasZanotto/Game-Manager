@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import authToken from '../middlewares/authToken';
-import MatchController from '../controllers/matchController';
+import MatchController from '../controllers/MatchController';
 import Match from '../database/models/Match';
 import MatchService from '../services/MatchService';
 import MatchMiddle from '../middlewares/matchMiddle';
@@ -29,16 +29,6 @@ router.patch(
 router.patch(
   '/matches/:id',
   (req, res) => matchController.updateMatchesGoals(req, res),
-);
-
-router.get(
-  '/leaderboard/home',
-  (req, res) => matchController.createLeaderBoardHome(req, res),
-);
-
-router.get(
-  '/leaderboard/away',
-  (req, res) => matchController.createLeaderBoardAway(req, res),
 );
 
 export default router;

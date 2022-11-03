@@ -33,16 +33,4 @@ export default class MatchController {
       .matchService.updateMatchGoals(req.params.id, req.body.homeTeamGoals, req.body.awayTeamGoals);
     return res.status(200).json(goals);
   }
-
-  async createLeaderBoardHome(req: Request, res: Response) {
-    const matches = await this.matchService.leaderBoardHome();
-
-    return res.status(200).json(matches);
-  }
-
-  async createLeaderBoardAway(req: Request, res: Response) {
-    const matches = await this.matchService.leaderBoardAway();
-
-    return res.status(200).json(matches);
-  }
 }

@@ -2,7 +2,6 @@ import { Router } from 'express';
 import authToken from '../middlewares/authToken';
 import userMiddle from '../middlewares/userMiddle';
 import loginMiddle from '../middlewares/loginMiddle';
-import authPass from '../middlewares/authPass';
 import User from '../database/models/User';
 import LoginUserService from '../services/LoginUserService';
 import LoginController from '../controllers/LoginController';
@@ -14,7 +13,6 @@ const router = Router();
 router.post(
   '/login',
   userMiddle,
-  authPass,
   loginMiddle,
   (req, res) => loginController.findUser(req, res),
 );

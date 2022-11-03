@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 
-// const { JWT_SECRET } = process.env;
-
 export default function authToken(req: Request, res: Response, next: NextFunction) {
   const token = req.headers.authorization;
 

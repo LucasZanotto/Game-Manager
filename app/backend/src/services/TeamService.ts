@@ -9,11 +9,11 @@ export default class TeamService {
     return teams;
   }
 
-  async findIdTeams(id: string): Promise<ITeam> {
+  async findIdTeams(id: string): Promise<ITeam | null> {
     const teamId = await this.teamModel.findOne({
       where: { id },
     });
-    if (!teamId) throw new Error('Time não existe');
+    if (Number(id) > 16) throw new Error('Time não existe');
     return teamId;
   }
 }

@@ -1,17 +1,8 @@
-import { sign, SignOptions } from 'jsonwebtoken';
 import bcrypt = require('bcryptjs');
 import IUser from '../entities/IUser';
 import User from '../database/models/User';
 import userLocal from '../entities/IUserLocal';
-
-const generateToken = (user: User): string => {
-  const payload = { id: user.id, name: user.username, role: user.role };
-  const jwtCOnfig: SignOptions = {
-    expiresIn: '20d',
-  };
-  const token = sign(payload, 'jwt_secret', jwtCOnfig);
-  return token;
-};
+import generateToken from '../utils/generateToken';
 
 export default class LoginUserService {
   constructor(private userModel: typeof User) { }
